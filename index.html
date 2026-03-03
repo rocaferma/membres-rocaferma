@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Validador Membres</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 80px;
+    }
+    #resultat {
+      margin-top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Validació de Membres</h1>
+  <p id="resultat"></p>
+
+  <script>
+    const membres = {
+      "A0601": {nom: "Andreu Pérez Chaparro", estat: "Actiu"},
+      "J0701": {nom: "Júlia Borràs Tomàs", estat: "Actiu"},
+      "L0602": {nom: "Laura Alabart Aguiló", estat: "Actiu"},
+      "M0603": {nom: "Maria del Mar Borràs Pujol", estat: "Actiu"},
+      "M0601": {nom: "Maria Alsina Duch", estat: "Actiu"},
+      "P0901": {nom: "Paula Tomás Roig", estat: "Actiu"},
+      "F0801": {nom: "Fiona Anguera Vilà", estat: "Actiu"},
+      "M0901": {nom: "Martina Timoneda Punyet", estat: "Actiu"},
+      "J0801": {nom: "Joan Vargas Gómez", estat: "Actiu"},
+      "M0602": {nom: "Mireia Vendrell Ribas", estat: "Actiu"},
+      "S0901": {nom: "Sara Castillejo Iranzo", estat: "Actiu"},
+      "B0601": {nom: "Biel Timoneda Punyet", estat: "Actiu"},
+      "N0601": {nom: "Núria Clua Boquera", estat: "Actiu"},
+      "I0601": {nom: "Ivan Rovira Panisello", estat: "Actiu"},
+      "A0901": {nom: "Arnau Clua Boquera", estat: "Actiu"},
+      "R0201": {nom: "Roca Llaó Baiges", estat: "Actiu"},
+      "A0100": {nom: "Àngel Moran Margalef", estat: "Actiu"},
+      "A0201": {nom: "Abel Bernal Ferraté", estat: "Actiu"},
+      "N0801": {nom: "Nil Pérez Chaparro", estat: "Actiu"},
+      "M0501": {nom: "Miquel Anguera Brú", estat: "Actiu"},
+      "J0601": {nom: "Júlia Olivé Sarrà", estat: "Actiu"},
+      "D0501": {nom: "Dylan Agúndez Carrasco", estat: "Actiu"},
+      "J6601": {nom: "Joan Alabart Josa", estat: "Actiu"},
+      "M6801": {nom: "Marcel·la Aguiló Jordi", estat: "Actiu"},
+      "A1301": {nom: "Agnès Alabart Aguiló", estat: "Actiu"}
+    };
+
+    function obtenirCodiURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("codi");
+    }
+
+    function validar(codi) {
+      let resultat = document.getElementById("resultat");
+
+      if (membres[codi]) {
+        if (membres[codi].estat === "Actiu") {
+          resultat.innerHTML = "✅ MEMBRE ACTIU<br>" + membres[codi].nom;
+          resultat.style.color = "green";
+        } else {
+          resultat.innerHTML = "⚠️ MEMBRE NO ACTIU<br>" + membres[codi].nom;
+          resultat.style.color = "orange";
+        }
+      } else {
+        resultat.innerHTML = "❌ CODI NO VÀLID";
+        resultat.style.color = "red";
+      }
+    }
+
+    const codiURL = obtenirCodiURL();
+    if (codiURL) {
+      validar(codiURL.toUpperCase());
+    } else {
+      document.getElementById("resultat").innerHTML = "Escaneja el QR";
+    }
+  </script>
+
+</body>
+</html>
